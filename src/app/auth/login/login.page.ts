@@ -1,5 +1,9 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable @typescript-eslint/consistent-type-assertions */
+/* eslint-disable @typescript-eslint/member-ordering */
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,25 +14,41 @@ export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
 
-  name: string;
-  password: string;
+  inputEmail: string;
+  inputPassword: string;
+
+  isLoggedIn = false;
 
   usuarios: any = [
-    {email: 'bcf', senha: 'bcf'},
-    {email: 'mamae', senha: 'abacaxi'},
-    {email: 'papai', senha: 'melancia'},
+    {
+      email: 'teste',
+      senha: 'teste'
+    },
+    {
+      email: 'teste123',
+      senha: 'teste123'
+    },
+    {
+      email: 'teste321',
+      senha: 'teste321'
+    },
   ];
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+  ) {
+    this.router = router;
+  }
 
   ngOnInit() {
     this.createForm();
   }
 
   createForm() {
-    this.loginForm = this.fb.group({
+    this.loginForm = this.formBuilder.group({
       email:['', [Validators.required, Validators.email]],
-      senha:['', [Validators.required, Validators.minLength(6)]]
+      password:['', [Validators.required, Validators.minLength(6)]]
     });
   }
 
@@ -36,29 +56,20 @@ export class LoginPage implements OnInit {
     return <FormControl>this.loginForm.get('email');
   }
 
-  get senha(): FormControl {
-    return <FormControl>this.loginForm.get('senha');
+  get password(): FormControl {
+    return <FormControl>this.loginForm.get('password');
   }
 
-  realizarLogin(){
-    this.usuarios.array.forEach(us => {
-      us = this.usuarios;
-      if (us.email === this.name && us.senha === this.password) {
-        const isLoggedIn = false;
-        const router = document.querySelector('ion-router');
-        const routeRedirect = document.createElement('ion-route-redirect');
-        routeRedirect.setAttribute('from', '*');
-        routeRedirect.setAttribute('to', '/register');
-
-        if (!isLoggedIn) {
-          router.appendChild(routeRedirect);
-        }
-          return true;
+  login(){
+    for (const usuario of this.usuarios) {
+      if (this.inputEmail === usuario.email && this.inputPassword === usuario.senha) {
+        this.isLoggedIn = true;
+        this.router.navigate(['/', 'home']);
+        return;
       }
-    });
-
+    }
     alert('Dados incorretos, tente novamente.');
+    this.isLoggedIn = false;
     return false;
   }
-
 }
