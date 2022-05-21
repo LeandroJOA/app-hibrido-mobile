@@ -4,6 +4,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -19,30 +20,20 @@ export class LoginPage implements OnInit {
 
   isLoggedIn = false;
 
-  usuarios: any = [
-    {
-      email: 'teste',
-      senha: 'teste'
-    },
-    {
-      email: 'teste123',
-      senha: 'teste123'
-    },
-    {
-      email: 'teste321',
-      senha: 'teste321'
-    },
-  ];
+  users: any = [];
 
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
+    private http: HttpClient
   ) {
     this.router = router;
   }
 
   ngOnInit() {
     this.createForm();
+    this.searchUsers();
+    console.log(this.users);
   }
 
   createForm() {
@@ -60,8 +51,15 @@ export class LoginPage implements OnInit {
     return <FormControl>this.loginForm.get('password');
   }
 
+  searchUsers() {
+    console.log('buscando users');
+    
+    this.http.get(`http://localhost:8080/users`)
+      .subscribe(result => this.users = result);
+  }
+
   login(){
-    for (const usuario of this.usuarios) {
+    for (const usuario of this.users) {
       if (this.inputEmail === usuario.email && this.inputPassword === usuario.senha) {
         this.isLoggedIn = true;
         this.router.navigate(['/', 'home']);
