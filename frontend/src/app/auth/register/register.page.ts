@@ -1,6 +1,7 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 /* eslint-disable @typescript-eslint/member-ordering */
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
@@ -18,6 +19,7 @@ export class RegisterPage implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
@@ -37,6 +39,20 @@ export class RegisterPage implements OnInit {
 
   get password(): FormControl {
     return <FormControl>this.registerForm.get('password');
+  }
+
+  createUser() {
+    const body = {
+      email: this.inputEmail,
+      password: this.inputPassword,
+    }
+
+    try {
+      this.http.post<any>('http://localhost:8080/users', body)
+        .subscribe(() => console.log('adicionado'));
+    } catch (error) {
+      console.log('>>>>> Error' + error);
+    }
   }
 
 }

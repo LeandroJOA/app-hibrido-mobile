@@ -20,7 +20,20 @@ export class LoginPage implements OnInit {
 
   isLoggedIn = false;
 
-  users: any = [];
+  users: any = [
+    {
+      email: 'teste@gmail.com',
+      senha: 'teste'
+    },
+    {
+      email: 'teste123@gmail.com',
+      senha: 'teste123'
+    },
+    {
+      email: 'teste321@gmail.com',
+      senha: 'teste321'
+    },
+  ];;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,7 +45,6 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.createForm();
-    this.searchUsers();
     console.log(this.users);
   }
 
@@ -49,13 +61,6 @@ export class LoginPage implements OnInit {
 
   get password(): FormControl {
     return <FormControl>this.loginForm.get('password');
-  }
-
-  searchUsers() {
-    console.log('buscando users');
-    
-    this.http.get(`http://localhost:8080/users`)
-      .subscribe(result => this.users = result);
   }
 
   login(){
