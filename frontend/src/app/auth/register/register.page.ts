@@ -39,4 +39,7 @@ export class RegisterPage implements OnInit {
     return <FormControl>this.registerForm.get('password');
   }
 
+  cadastrarUsuario(){
+    alert('Registrado com sucesso!');
+  }
 }
