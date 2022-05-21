@@ -49,7 +49,7 @@ export class RegisterPage implements OnInit {
 
     try {
       this.http.post<any>('http://localhost:8080/users', body)
-        .subscribe(() => console.log('adicionado'));
+        .subscribe(() => alert('Cadastro realizado com sucesso!'));
     } catch (error) {
       console.log('>>>>> Error' + error);
     }
