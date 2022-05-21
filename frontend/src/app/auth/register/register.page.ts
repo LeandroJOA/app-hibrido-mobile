@@ -45,7 +45,7 @@ export class RegisterPage implements OnInit {
     const body = {
       email: this.inputEmail,
       password: this.inputPassword,
-    }
+    };
 
     try {
       this.http.post<any>('http://localhost:8080/users', body)

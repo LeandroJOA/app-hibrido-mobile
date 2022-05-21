@@ -67,7 +67,7 @@ export class LoginPage implements OnInit {
     for (const usuario of this.users) {
       if (this.inputEmail === usuario.email && this.inputPassword === usuario.senha) {
         this.isLoggedIn = true;
-        this.router.navigate(['/', 'home']);
+        this.router.navigate(['/', 'dashboard']);
         return;
       }
     }
