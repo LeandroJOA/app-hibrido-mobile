@@ -20,14 +20,15 @@ router.get('/:userId', (req, res) => {
   User.findOne({_id: req.params.userId})
     .exec()
     .then((result) => {
-      if (result === null) {
+      if (!result) {
         res.status(404).json({
           message: 'Usuario não encontrado!',
         });
+      } else {
+        res.status(200).json({
+          user: result,
+        });
       }
-      res.status(200).json({
-        user: result,
-      });
     })
     .catch((reject) => {
       res.status(500).json({
@@ -49,6 +50,32 @@ router.post('/', (req, res) => {
         message: 'Usuario salvo com sucesso!',
         user,
       });
+    })
+    .catch((reject) => {
+      res.status(500).json({
+        error: reject,
+      });
+    });
+});
+
+router.post('/login', (req, res) => {
+  User.findOne({
+    email: req.body.email,
+    password: req.body.password,
+  })
+    .exec()
+    .then((result) => {
+      if (!result) {
+        res.status(404).json({
+          message: 'Usuario não encontrado! Senha ou E-mail incorretos.',
+          authenticated: false,
+        });
+      } else {
+        res.status(200).json({
+          message: 'Usuario autenticado!',
+          authenticated: true,
+        });
+      }
     })
     .catch((reject) => {
       res.status(500).json({

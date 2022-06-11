@@ -33,7 +33,7 @@ export class LoginPage implements OnInit {
       email: 'teste321@gmail.com',
       senha: 'teste321'
     },
-  ];;
+  ];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,15 +64,27 @@ export class LoginPage implements OnInit {
   }
 
   login(){
-    for (const usuario of this.users) {
-      if (this.inputEmail === usuario.email && this.inputPassword === usuario.senha) {
-        this.isLoggedIn = true;
-        this.router.navigate(['/', 'dashboard']);
-        return;
-      }
+    const body = {
+      email: this.inputEmail,
+      password: this.inputPassword,
     }
-    alert('Dados incorretos, tente novamente.');
-    this.isLoggedIn = false;
-    return false;
+
+    try {
+      this.http.post<any>('http://localhost:8080/users/login', body)
+        .subscribe(result => {
+          if (result.authenticated) {
+            alert('Usuario autenticado com sucesso!');
+            this.isLoggedIn = true;
+            this.router.navigate(['/', 'dashboard']);
+            return;
+          } else {
+            alert('Falha na autenticação! Senha e/ou E-mail incorreto.');
+            this.isLoggedIn = false;
+            return false;
+          }
+        });
+    } catch (error) {
+      console.log('>>>>> Error' + error);
+    }
   }
 }
