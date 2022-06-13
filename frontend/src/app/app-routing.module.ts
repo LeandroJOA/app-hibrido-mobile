@@ -30,10 +30,20 @@ const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
-  },  {
+  },
+  {
     path: 'list',
     loadChildren: () => import('./courses/list/list.module').then( m => m.ListPageModule)
   },
+  {
+    path: 'users/edit/:userId',
+    loadChildren: () => import('./users/edit/edit.module').then( m => m.EditPageModule)
+  },
+  {
+    path: 'users/create',
+    loadChildren: () => import('./users/create/create.module').then( m => m.CreatePageModule)
+  },
+
 
 
 ];
