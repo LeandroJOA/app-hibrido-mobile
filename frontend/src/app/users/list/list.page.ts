@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPage implements OnInit {
 
+  contacts:any = [
+    {
+      name: "Leandro",
+      tel: "190"
+    },
+  ]
   constructor() { }
 
   ngOnInit() {
