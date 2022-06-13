@@ -24,13 +24,23 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+  },
+  {
     path: 'users/list',
     loadChildren: () => import('./users/list/list.module').then( m => m.ListPageModule)
   },
   {
-    path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
+    path: 'users/edit/:userId',
+    loadChildren: () => import('./users/edit/edit.module').then( m => m.EditPageModule)
   },
+  {
+    path: 'users/create',
+    loadChildren: () => import('./users/create/create.module').then( m => m.CreatePageModule)
+  },
+
+
 
 ];
 

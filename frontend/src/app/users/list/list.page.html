@@ -16,23 +16,32 @@
     <ion-list-header class="ios hydrated">
       Usuários cadastrados
     </ion-list-header>
-    <ion-item>
+    <ion-item *ngFor="let user of users">
       <ion-label>
         <h5>
-          <ion-icon name="person"></ion-icon> Teste
+          <ion-icon name="mail-outline"></ion-icon> {{user.email}}
         </h5>
         <p>
-          <ion-icon name="call"></ion-icon> Teste
+          <ion-icon name="lock-closed-outline"></ion-icon> {{user.password}}
         </p>
       </ion-label>
       <div class="item-note" item-end>
-        <button ion-button clear>
+        <button ion-button clear [routerLink]="['/users/edit', user._id]">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
-        <button ion-button clear>
+        <button ion-button clear (click)="deleteUser(user._id)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>
         </button>
       </div>
     </ion-item>
   </ion-list>
 </ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/users/create">
+      <ion-icon name="add-outline"></ion-icon>
+      <ion-label>Novo Usuário</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
