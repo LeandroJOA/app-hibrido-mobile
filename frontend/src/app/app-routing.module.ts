@@ -43,6 +43,20 @@ const routes: Routes = [
     path: 'users/create',
     loadChildren: () => import('./users/create/create.module').then( m => m.CreatePageModule)
   },
+  {
+    path: 'create',
+    loadChildren: () => import('./courses/create/create.module').then( m => m.CreatePageModule)
+  },
+  {
+    path: 'classes/list',
+    loadChildren: () => import('./classes/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'classes/create',
+    loadChildren: () => import('./classses/create/create.module').then( m => m.CreatePageModule)
+  },
+
+
 
 
 
