@@ -28,7 +28,7 @@ const routes: Routes = [
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
   {
-    path: 'users/list',
+    path: 'users',
     loadChildren: () => import('./users/list/list.module').then( m => m.ListPageModule)
   },
   {
@@ -39,7 +39,22 @@ const routes: Routes = [
     path: 'users/create',
     loadChildren: () => import('./users/create/create.module').then( m => m.CreatePageModule)
   },
-
+  {
+    path: 'courses',
+    loadChildren: () => import('./courses/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'courses/create',
+    loadChildren: () => import('./courses/create/create.module').then( m => m.CreatePageModule)
+  },
+  {
+    path: 'students',
+    loadChildren: () => import('./students/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'students/create',
+    loadChildren: () => import('./students/create/create.module').then( m => m.CreatePageModule)
+  },
 
 
 ];

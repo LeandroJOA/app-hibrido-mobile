@@ -1,9 +1,35 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>edit</ion-title>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Usuários
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/user">
+        <ion-icon name="log-out-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="registerForm">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <ion-item>
+              <ion-input type="email" formControlName="email" placeholder="E-Mail" [(ngModel)]="inputEmail"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input type="password" formControlName="password" placeholder="Senha" [(ngModel)]="inputPassword">
+              </ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" expand="block" (click)="createUser()">Cadastrar</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
 </ion-content>
