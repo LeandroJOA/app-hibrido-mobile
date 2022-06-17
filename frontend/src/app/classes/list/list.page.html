@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Usuários
+      Turmas
     </ion-title>
     <ion-buttons slot="end">
       <ion-button routerLink="/admin">
@@ -14,27 +14,26 @@
 <ion-content>
   <ion-list class="ios list-ios hydrated">
     <ion-list-header class="ios hydrated">
-      Usuários cadastrados
+      Turmas cadastradas
     </ion-list-header>
-    <ion-item *ngFor="let user of users">
+    <ion-item *ngFor="let classe of classes">
       <ion-label>
         <h5>
-          <ion-icon name="mail-outline"></ion-icon> {{user.email}}
+          <ion-icon name="mail-outline"></ion-icon> {{classe.classe}}
         </h5>
         <p>
-          <ion-icon name="lock-closed-outline"></ion-icon> {{user.password}}
+          <ion-icon name="lock-closed-outline"></ion-icon> {{classe.courseId}}
         </p>
       </ion-label>
       <div class="item-note" item-end>
-        <button ion-button clear routerLink="">
+        <button ion-button clear [routerLink]="['/users/edit', classe._id]">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
-        <button ion-button clear (click)="deleteUser(user._id)">
+        <button ion-button clear (click)="deleteClasses(classe._id)">
           <ion-icon name="trash" style="zoom:2.0"></ion-icon>
         </button>
       </div>
     </ion-item>
   </ion-list>
-
-  <ion-button size="large" type="submit" expand="block" routerLink="/users/create">Novo Usuário</ion-button>
+  <ion-button size="large" type="submit" expand="block" routerLink="/classes/create">Adicionar nova turma</ion-button>
 </ion-content>

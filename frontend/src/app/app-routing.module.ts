@@ -24,6 +24,10 @@ const routes: Routes = [
     loadChildren: () => import('./dashboard/dashboard.module').then( m => m.DashboardPageModule)
   },
   {
+    path: 'users/list',
+    loadChildren: () => import('./users/list/list.module').then( m => m.ListPageModule)
+  },
+  {
     path: 'admin',
     loadChildren: () => import('./admin/admin.module').then( m => m.AdminPageModule)
   },
@@ -55,8 +59,14 @@ const routes: Routes = [
     path: 'students/create',
     loadChildren: () => import('./students/create/create.module').then( m => m.CreatePageModule)
   },
-
-
+  {
+    path: 'classes/list',
+    loadChildren: () => import('./classes/list/list.module').then( m => m.ListPageModule)
+  },
+  {
+    path: 'classes/create',
+    loadChildren: () => import('./classses/create/create.module').then( m => m.CreatePageModule)
+  },
 ];
 
 @NgModule({
