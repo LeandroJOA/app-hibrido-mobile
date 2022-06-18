@@ -1,16 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.page.html',
-  styleUrls: ['./create.page.scss'],
+  selector: 'app-edit',
+  templateUrl: './edit.page.html',
+  styleUrls: ['./edit.page.scss'],
 })
-export class CreatePage implements OnInit {
-
+export class EditPage implements OnInit {
   registerForm: FormGroup;
-  inputclasse: string;
+  inputclass: string;
   inputcourseId: string;
 
   constructor(
@@ -24,14 +23,14 @@ export class CreatePage implements OnInit {
 
   createForm() {
     this.registerForm = this.formBuilder.group({
-      classe:['', [Validators.required]],
+      class:['', [Validators.required]],
       courseId:['', [Validators.required]]
     });
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
-  get classe(): FormControl {
-    return <FormControl>this.registerForm.get('classe');
+  get class(): FormControl {
+    return <FormControl>this.registerForm.get('class');
   }
 
   // eslint-disable-next-line @typescript-eslint/member-ordering
@@ -39,14 +38,14 @@ export class CreatePage implements OnInit {
     return <FormControl>this.registerForm.get('courseId');
   }
 
-  createClasse() {
+  createClass(id) {
     const body = {
-      classe: this.inputclasse,
+      class: this.inputclass,
       courseId: this.inputcourseId,
     };
 
     try {
-      this.http.post<any>('http://localhost:8080/classes', body)
+      this.http.put<any>('http://localhost:8080/classes/' +id, body)
         .subscribe(() => alert('Cadastro realizado com sucesso!'));
     } catch (error) {
       console.log('>>>>> Error' + error);

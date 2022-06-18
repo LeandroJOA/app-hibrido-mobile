@@ -23,7 +23,7 @@
         </h5>
       </ion-label>
       <div class="item-note" item-end>
-        <button ion-button clear routerLink="/users/edit/">
+        <button ion-button clear [routerLink]="['/courses/edit/', course._id]">
           <ion-icon name="create" style="zoom:2.0"></ion-icon>
         </button>
         <button ion-button clear (click)="deleteCourse(course._id)">

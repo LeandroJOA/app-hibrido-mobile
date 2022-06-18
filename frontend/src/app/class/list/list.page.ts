@@ -8,31 +8,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListPage implements OnInit {
 
-  classes: any = [];
+  class: any = [];
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
-    this.listClasses();
+    this.listClass();
   }
 
-  listClasses() {
+  listClass() {
     try {
         this.http.get<any>(`http://localhost:8080/classes`)
-          .subscribe(result => this.classes = result);
+          .subscribe(result => this.class = result);
       } catch (error) {
         console.log('>>>>> Error' + error);
       }
   }
 
-  deleteClasses(classeId) {
+  deleteClass(classId) {
     if (confirm('Deseja deletar este turma?')) {
       try {
-        this.http.delete<any>(`http://localhost:8080/classes/${classeId}`)
+        this.http.delete<any>(`http://localhost:8080/classes/${classId}`)
           .subscribe(() => {
             alert('Turma deletado com sucesso!');
 
-            this.listClasses();
+            this.listClass();
           });
       } catch (error) {
         console.log('>>>>> Error' + error);

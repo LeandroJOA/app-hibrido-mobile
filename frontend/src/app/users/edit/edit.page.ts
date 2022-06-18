@@ -11,34 +11,18 @@ import { Subscription } from 'rxjs/internal/Subscription';
 })
 export class EditPage implements OnInit {
 
-  private routeSub: Subscription;
-
   registerForm: FormGroup;
 
-  user:any = {};
-
-  inputEmail: string = this.user.email;
-  inputPassword: string = this.user.password;
+  inputEmail: string;
+  inputPassword: string;
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient,
-    private route: ActivatedRoute
+    private http: HttpClient
   ) {}
 
   ngOnInit() {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.listUsers(params['userId']);
-    });
-  }
-
-  listUsers(userId) {
-    try {
-        this.http.get<any>(`http://localhost:8080/users/${userId}`)
-          .subscribe(result => this.user = result);
-      } catch (error) {
-        console.log('>>>>> Error' + error);
-      }
+    this.createForm();
   }
 
   createForm() {
@@ -56,14 +40,14 @@ export class EditPage implements OnInit {
     return <FormControl>this.registerForm.get('password');
   }
 
-  createUser() {
+  createUser(id) {
     const body = {
       email: this.inputEmail,
       password: this.inputPassword,
     };
 
     try {
-      this.http.put<any>('http://localhost:8080/users', body)
+      this.http.put<any>('http://localhost:8080/users/' + id, body)
         .subscribe(() => alert('Cadastro realizado com sucesso!'));
     } catch (error) {
       console.log('>>>>> Error' + error);

@@ -15,7 +15,7 @@ const app = express();
 
 app.use(morgan('dev'));
 
-mongoose.connect(process.env.DB_DRIVER, {
+mongoose.connect("mongodb+srv://unidesc:unidesc@unidesc.zrjpt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
   useNewUrlParser: true,
 });
 

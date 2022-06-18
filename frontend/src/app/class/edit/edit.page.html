@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Alunos
+      Turmas
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button routerLink="/students">
+      <ion-button routerLink="/class">
         <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -18,19 +18,15 @@
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div padding>
             <ion-item>
-              <ion-input type="text" formControlName="name" placeholder="Nome" [(ngModel)]="inputName"></ion-input>
+              <ion-input type="text" formControlName="class" placeholder="Turma" [(ngModel)]="inputclass"></ion-input>
             </ion-item>
             <ion-item>
-              <ion-input type="text" formControlName="class" placeholder="Class" [(ngModel)]="inputClass">
-              </ion-input>
-            </ion-item>
-            <ion-item>
-              <ion-input type="text" formControlName="document" placeholder="CPF" [(ngModel)]="inputDocument">
+              <ion-input type="text" formControlName="courseId" placeholder="IDTurma" [(ngModel)]="inputcourseId">
               </ion-input>
             </ion-item>
           </div>
           <div padding>
-            <ion-button size="large" type="submit" expand="block" (click)="createStudent()">Cadastrar</ion-button>
+            <ion-button size="large" type="submit" expand="block" (click)="createClass()">Salvar</ion-button>
           </div>
         </ion-col>
       </ion-row>
